@@ -22,6 +22,7 @@ namespace Infrastructure
                 provider.GetService<AppDbContext>());
 
             services.AddTransient<IDateTime, DateTimeService>();
+            services.AddSingleton<IFileService, FileService>();
 
             return services;
         }
