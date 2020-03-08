@@ -1,15 +1,28 @@
 ﻿using System.Reflection;
+using Application.Common.AppSettingHelpers.Configurations;
 using Application.Common.Behaviours;
 using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services
+            , IConfiguration configuration
+            , string hostEnvironmentContentRootPath)
         {
+            services.AddAppSettingHelpers(configuration, hostEnvironmentContentRootPath);
+            services.AddLogging(configure =>
+            {
+                configure.AddDebug();
+                configure.AddSerilog();
+            });
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>)

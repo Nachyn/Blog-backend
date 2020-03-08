@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Application.Common.AppSettingHelpers;
+using Application.Common.AppSettingHelpers.Main;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Helpers;

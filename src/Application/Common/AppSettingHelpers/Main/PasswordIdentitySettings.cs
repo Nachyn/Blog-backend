@@ -1,4 +1,4 @@
-﻿namespace Application.Common.AppSettingHelpers
+﻿namespace Application.Common.AppSettingHelpers.Main
 {
     public class PasswordIdentitySettings
     {
