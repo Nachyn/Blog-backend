@@ -1,0 +1,13 @@
+﻿using System.ComponentModel;
+
+namespace Domain.Enums
+{
+    public enum Cultures
+    {
+        [Description("ru")] 
+        RU = 1,
+
+        [Description("en")] 
+        EN = 2
+    }
+}

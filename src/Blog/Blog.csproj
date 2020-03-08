@@ -21,7 +21,13 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="SQLScripts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="SQLScripts\**\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>

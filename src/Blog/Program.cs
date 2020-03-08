@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using Domain.Entities;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -40,23 +42,29 @@ namespace Blog
 
                 using (var scope = host.Services.CreateScope())
                 {
-                    //var services = scope.ServiceProvider;
-                    //try
-                    //{
-                    //    var context = services.GetRequiredService<ApplicationDbContext>();
-                    //    context.Database.Migrate();
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        var userManager =
+                            services.GetRequiredService<UserManager<AppUser>>();
 
-                    //    var userManager = services
-                    //        .GetRequiredService<UserManager<AppUser>>();
+                        var rolesManager = services
+                            .GetRequiredService<RoleManager<IdentityRole<int>>>();
 
-                    //    await ApplicationDbContextSeed.SeedAsync(userManager);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    var logger = services.GetRequiredService<ILogger<Program>>();
-                    //    logger.LogError(ex,
-                    //        "An error occurred while seeding the database.");
-                    //}
+                        var configurationManager = services
+                            .GetRequiredService<IConfiguration>();
+
+                        var context = services.GetRequiredService<AppDbContext>();
+
+                        await AppDbContextSeed.InitializeAsync(userManager, rolesManager,
+                            configurationManager, context);
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex,
+                            "An error occurred while seeding the database.");
+                    }
                 }
 
                 host.Run();
