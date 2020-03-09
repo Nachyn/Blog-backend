@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Identity;
 
 namespace Application.Common.Exceptions
 {
@@ -26,6 +27,16 @@ namespace Application.Common.Exceptions
 
                 Failures.Add(propertyName, propertyFailures);
             }
+        }
+
+        public ValidationException(IdentityResult identityResult)
+            : this()
+        {
+            Failures = identityResult.Errors
+                .GroupBy(e => e.Code)
+                .ToDictionary(g => g.Key
+                    , g => g.Select(g => g.Description)
+                        .ToArray());
         }
 
         public IDictionary<string, string[]> Failures { get; }
