@@ -2,6 +2,7 @@
 using Application.Common.AppSettingHelpers.Configurations;
 using Application.Common.Behaviours;
 using AutoMapper;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,6 +31,7 @@ namespace Application
 
             services.AddTransient(typeof(IPipelineBehavior<,>)
                 , typeof(RequestValidationBehavior<,>));
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             return services;
         }
