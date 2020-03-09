@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Application.Common.AppSettingHelpers.Entities;
 using Application.Common.AppSettingHelpers.Main;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,7 +32,19 @@ namespace Application.Common.AppSettingHelpers.Configurations
             services.Configure<AuthOptions>(
                 configuration.GetSection(nameof(AuthOptions)));
 
+            ConfigureEntities(services, configuration);
+
             return services;
+        }
+
+        private static void ConfigureEntities(
+            IServiceCollection services
+            , IConfiguration configuration)
+        {
+            const string EntitySection = "EntityOptions:";
+
+            services.Configure<AppUserOptions>(
+                configuration.GetSection($"{EntitySection}AppUser"));
         }
     }
 }
