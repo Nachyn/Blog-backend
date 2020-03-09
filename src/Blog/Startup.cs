@@ -1,10 +1,13 @@
 using Application;
 using Blog.Common.Extensions;
 using Blog.Common.Middlewares;
+using Domain.Enums;
+using Domain.Helpers;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,9 +59,9 @@ namespace Blog
                 .AddDbContextCheck<AppDbContext>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (WebHostEnvironment.IsDevelopment())
             {
                 app.UseCors("EnableCORS");
                 app.UseDeveloperExceptionPage();
@@ -70,6 +73,15 @@ namespace Blog
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
+
+            var supportedCultures = CulturesHelper.GetSupportedCulturesInfo();
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture =
+                    new RequestCulture(Cultures.RU.GetEnumDescription()),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseCustomExceptionHandler();
             app.UseHealthChecks("/health");
