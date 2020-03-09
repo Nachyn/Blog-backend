@@ -10,7 +10,7 @@ namespace Application.Common.AppSettingHelpers.Configurations
         public static IServiceCollection AddAppSettingHelpers(
             this IServiceCollection services
             , IConfiguration configuration
-            , string hostEnvironmentContentRootPath)
+            , string webHostEnvironmentContentRootPath)
         {
             services.AddOptions();
 
@@ -24,9 +24,12 @@ namespace Application.Common.AppSettingHelpers.Configurations
                 directory =>
                 {
                     directory.RootFileFolder =
-                        Path.Combine(hostEnvironmentContentRootPath, "files");
+                        Path.Combine(webHostEnvironmentContentRootPath, "files");
                 }
             );
+
+            services.Configure<AuthOptions>(
+                configuration.GetSection(nameof(AuthOptions)));
 
             return services;
         }

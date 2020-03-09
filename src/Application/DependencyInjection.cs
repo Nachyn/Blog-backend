@@ -14,9 +14,9 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services
             , IConfiguration configuration
-            , string hostEnvironmentContentRootPath)
+            , string webHostEnvironmentContentRootPath)
         {
-            services.AddAppSettingHelpers(configuration, hostEnvironmentContentRootPath);
+            services.AddAppSettingHelpers(configuration, webHostEnvironmentContentRootPath);
             services.AddLogging(configure =>
             {
                 configure.AddDebug();
