@@ -8,7 +8,7 @@ namespace Blog.Controllers
     public class AccountsController : ApiController
     {
         [HttpPost]
-        public async Task<ActionResult<CreateAccountUserInfo>> CreateAccount(
+        public async Task<ActionResult<CreateAccountUserInfoDto>> CreateAccount(
             [FromBody] CreateAccountCommand command)
         {
             return await Mediator.Send(command);

@@ -5,7 +5,7 @@ using Domain.Entities;
 
 namespace Application.Accounts.Commands.CreateAccount
 {
-    public class CreateAccountUserInfo : IMapFrom<AppUser>
+    public class CreateAccountUserInfoDto : IMapFrom<AppUser>
     {
         public int Id { get; set; }
 
@@ -17,7 +17,7 @@ namespace Application.Accounts.Commands.CreateAccount
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<AppUser, CreateAccountUserInfo>()
+            profile.CreateMap<AppUser, CreateAccountUserInfoDto>()
                 .ForMember(d => d.Roles, opt => opt.Ignore());
         }
     }

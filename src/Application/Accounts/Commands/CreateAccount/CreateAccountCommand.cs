@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Application.Accounts.Commands.CreateAccount
 {
-    public class CreateAccountCommand : IRequest<CreateAccountUserInfo>
+    public class CreateAccountCommand : IRequest<CreateAccountUserInfoDto>
     {
         public string Email { get; set; }
 
@@ -21,7 +21,7 @@ namespace Application.Accounts.Commands.CreateAccount
         public string Username { get; set; }
 
         public class CreateAccountCommandHandler
-            : IRequestHandler<CreateAccountCommand, CreateAccountUserInfo>
+            : IRequestHandler<CreateAccountCommand, CreateAccountUserInfoDto>
         {
             private readonly UserManager<AppUser> _userManager;
 
@@ -34,7 +34,7 @@ namespace Application.Accounts.Commands.CreateAccount
                 _mapper = mapper;
             }
 
-            public async Task<CreateAccountUserInfo> Handle(CreateAccountCommand request
+            public async Task<CreateAccountUserInfoDto> Handle(CreateAccountCommand request
                 , CancellationToken cancellationToken)
             {
                 var user = new AppUser
@@ -59,7 +59,7 @@ namespace Application.Accounts.Commands.CreateAccount
                     throw new Exception("error adding role to user");
                 }
 
-                var response = _mapper.Map<CreateAccountUserInfo>(user);
+                var response = _mapper.Map<CreateAccountUserInfoDto>(user);
                 response.Roles = (await _userManager.GetRolesAsync(user)).ToList();
                 return response;
             }
