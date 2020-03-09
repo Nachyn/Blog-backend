@@ -4,12 +4,13 @@ using Domain.Enums;
 using Domain.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Persistence.Extensions
+namespace Infrastructure.Persistence.Configurations
 {
-    public static class ModelBuilderExtensions
+    public class IdentityRoleConfiguration : IEntityTypeConfiguration<IdentityRole<int>>
     {
-        public static ModelBuilder AddRoles(this ModelBuilder modelBuilder)
+        public void Configure(EntityTypeBuilder<IdentityRole<int>> builder)
         {
             var enumValues = Enum.GetValues(typeof(Roles)).Cast<Roles>();
 
@@ -27,11 +28,7 @@ namespace Infrastructure.Persistence.Extensions
                 })
                 .ToArray();
 
-            modelBuilder
-                .Entity<IdentityRole<int>>()
-                .HasData(roles);
-
-            return modelBuilder;
+            builder.HasData(roles);
         }
     }
 }

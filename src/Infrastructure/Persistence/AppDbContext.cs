@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Common.Interfaces;
 using Domain.Entities;
-using Infrastructure.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +40,6 @@ namespace Infrastructure.Persistence
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            builder.AddRoles();
         }
 
         private void OnBeforeSaving()

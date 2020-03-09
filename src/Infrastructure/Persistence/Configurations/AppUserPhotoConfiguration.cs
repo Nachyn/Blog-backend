@@ -8,8 +8,15 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<AppUserPhoto> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(250);
-            builder.Property(p => p.Path).HasMaxLength(250);
+            builder.ToTable("UserPhotos");
+
+            builder.Property(p => p.Name)
+                .HasMaxLength(250)
+                .IsRequired();
+
+            builder.Property(p => p.Path)
+                .HasMaxLength(250)
+                .IsRequired();
 
             builder.HasAlternateKey(p => p.Path);
         }

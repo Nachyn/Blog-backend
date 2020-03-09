@@ -8,8 +8,15 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<PostFile> builder)
         {
-            builder.Property(f => f.Name).HasMaxLength(250);
-            builder.Property(f => f.Path).HasMaxLength(250);
+            builder.ToTable("PostFiles");
+
+            builder.Property(f => f.Name)
+                .HasMaxLength(250)
+                .IsRequired();
+
+            builder.Property(f => f.Path)
+                .HasMaxLength(250)
+                .IsRequired();
 
             builder.HasAlternateKey(f => f.Path);
         }
