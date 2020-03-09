@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Application.Common.AppSettingHelpers.Configurations;
 using Application.Common.Behaviours;
+using Application.Common.Mappings;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
@@ -24,7 +25,12 @@ namespace Application
                 configure.AddSerilog();
             });
 
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            //Для проверки конфига на старте, а не в момент обращения к IMapper.
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            var mapperConfiguration = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
+            mapperConfiguration.AssertConfigurationIsValid();
+            services.AddSingleton(mapperConfiguration.CreateMapper());
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>)
                 , typeof(RequestPerformanceBehaviour<,>));

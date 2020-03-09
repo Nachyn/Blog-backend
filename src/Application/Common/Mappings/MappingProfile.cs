@@ -30,9 +30,6 @@ namespace Application.Common.Mappings
 
                 methodInfo?.Invoke(instance, new object[] {this});
             }
-
-            new MapperConfiguration(mc => mc.AddProfile(this))
-                .AssertConfigurationIsValid();
         }
     }
 }
