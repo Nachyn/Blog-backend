@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 
-namespace Blog.Localization
+namespace Blog.Common.Localization
 {
     public class LocalizedIdentityErrorDescriber : IdentityErrorDescriber
     {

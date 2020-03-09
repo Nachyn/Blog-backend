@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# My ingore
+src/Blog/Blog.xml
+src/Blog/Controllers/TestController.cs
+
 # User-specific files
 *.rsuser
 *.suo

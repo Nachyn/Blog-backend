@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Application.Common.AppSettingHelpers.Main;
-using Blog.Localization;
+using Blog.Common.Localization;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
