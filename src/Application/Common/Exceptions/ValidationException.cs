@@ -39,6 +39,15 @@ namespace Application.Common.Exceptions
                         .ToArray());
         }
 
+        public ValidationException(params string[] errors)
+            : this()
+        {
+            if (errors != null)
+            {
+                Failures.Add(string.Empty, errors);
+            }
+        }
+
         public IDictionary<string, string[]> Failures { get; }
     }
 }

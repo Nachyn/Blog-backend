@@ -20,6 +20,8 @@ namespace Application.Accounts.Commands.CreateAccount
                 accountLocalizer["EmailValid", _appUserOptions.EmailMaxLength];
 
             RuleFor(v => v.Email)
+                .NotNull()
+                .WithMessage(invalidEmailMessage)
                 .EmailAddress()
                 .WithMessage(invalidEmailMessage)
                 .MaximumLength(_appUserOptions.EmailMaxLength)
