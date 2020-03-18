@@ -120,6 +120,21 @@
   <data name="EmailValid" xml:space="preserve">
     <value>Некорректная почта.</value>
   </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Введите пароль.</value>
+  </data>
+  <data name="EnterRefreshToken" xml:space="preserve">
+    <value>Введите refresh токен.</value>
+  </data>
+  <data name="LoginType" xml:space="preserve">
+    <value>Type должен быть {0} или {1}.</value>
+  </data>
+  <data name="RefreshTokenInvalid" xml:space="preserve">
+    <value>Некорректный или истекший refresh токен.</value>
+  </data>
+  <data name="UnableLogin" xml:space="preserve">
+    <value>Пользователь не найден или введены неверные данные.</value>
+  </data>
   <data name="UsernameValid" xml:space="preserve">
     <value>Имя пользователя может содержать от {0} до {1} латинских букв и цифр.</value>
   </data>
