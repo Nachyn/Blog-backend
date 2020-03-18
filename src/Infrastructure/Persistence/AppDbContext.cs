@@ -29,6 +29,8 @@ namespace Infrastructure.Persistence
 
         public DbSet<PostFile> PostFiles { get; set; }
 
+        public DbSet<Token> Tokens { get; set; }
+
         public override Task<int> SaveChangesAsync(
             CancellationToken cancellationToken = default)
         {

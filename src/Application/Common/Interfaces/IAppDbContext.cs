@@ -15,6 +15,8 @@ namespace Application.Common.Interfaces
 
         DbSet<PostFile> PostFiles { get; set; }
 
+        DbSet<Token> Tokens { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
