@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using Application.Common.AppSettingHelpers.Configurations;
 using Application.Common.Behaviours;
+using Application.Common.Interfaces;
 using Application.Common.Mappings;
+using Application.Common.Services;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
@@ -38,6 +40,9 @@ namespace Application
             services.AddTransient(typeof(IPipelineBehavior<,>)
                 , typeof(RequestValidationBehavior<,>));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            services.AddHttpContextAccessor();
+            services.AddTransient<IUserAccessor, UserAccessor>();
 
             return services;
         }
