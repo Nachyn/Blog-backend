@@ -126,4 +126,13 @@
   <data name="FileNull" xml:space="preserve">
     <value>Файл не найден.</value>
   </data>
+  <data name="PhotoErrorType" xml:space="preserve">
+    <value>Тип фотографии должен быть JPG, JPEG или PNG.</value>
+  </data>
+  <data name="PhotoMaxLength" xml:space="preserve">
+    <value>Фото не может быть больше {0} МБ.</value>
+  </data>
+  <data name="PhotoNull" xml:space="preserve">
+    <value>Фото не найдено.</value>
+  </data>
 </root>
