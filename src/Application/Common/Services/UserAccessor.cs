@@ -15,5 +15,7 @@ namespace Application.Common.Services
         }
 
         public ClaimsPrincipal User => _accessor.HttpContext.User;
+
+        public int UserId => int.Parse(User.Identity.Name);
     }
 }
