@@ -32,6 +32,12 @@ namespace Application.Common.AppSettingHelpers.Configurations
             services.Configure<AuthOptions>(
                 configuration.GetSection(nameof(AuthOptions)));
 
+            services.Configure<FileSettings>(
+                configuration.GetSection(nameof(FileSettings)));
+
+            services.Configure<PhotoSettings>(
+                configuration.GetSection(nameof(PhotoSettings)));
+
             ConfigureEntities(services, configuration);
 
             return services;
