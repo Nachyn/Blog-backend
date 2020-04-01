@@ -6,6 +6,7 @@
 # My ingore
 src/Blog/Blog.xml
 src/Blog/Controllers/TestController.cs
+src/Blog/files
 
 # User-specific files
 *.rsuser
