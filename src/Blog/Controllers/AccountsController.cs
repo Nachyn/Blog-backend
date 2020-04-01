@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
 {
-    [Route("api/account")]
+    [Route("api/accounts")]
     public class AccountsController : ApiController
     {
         [HttpPost]
