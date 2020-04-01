@@ -38,6 +38,9 @@ namespace Application.Common.AppSettingHelpers.Configurations
             services.Configure<PhotoSettings>(
                 configuration.GetSection(nameof(PhotoSettings)));
 
+            services.Configure<PhotosDirectory>(
+                configuration.GetSection(nameof(PhotosDirectory)));
+
             ConfigureEntities(services, configuration);
 
             return services;
