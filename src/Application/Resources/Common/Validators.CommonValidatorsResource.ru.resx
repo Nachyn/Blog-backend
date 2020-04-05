@@ -126,6 +126,15 @@
   <data name="FileNull" xml:space="preserve">
     <value>Файл не найден.</value>
   </data>
+  <data name="IdRange" xml:space="preserve">
+    <value>Идентификатор должен быть больше 0.</value>
+  </data>
+  <data name="NumberPageRange" xml:space="preserve">
+    <value>Номер страницы должен быть больше 0.</value>
+  </data>
+  <data name="PageSizeRange" xml:space="preserve">
+    <value>Размер страницы должен быть больше 0.</value>
+  </data>
   <data name="PhotoErrorType" xml:space="preserve">
     <value>Тип фотографии должен быть JPG, JPEG или PNG.</value>
   </data>
