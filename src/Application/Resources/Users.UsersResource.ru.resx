@@ -120,4 +120,7 @@
   <data name="PhotosEmpty" xml:space="preserve">
     <value>Добавьте фотографии.</value>
   </data>
+  <data name="UserNull" xml:space="preserve">
+    <value>Пользователь не найден.</value>
+  </data>
 </root>

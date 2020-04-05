@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Application.Users.Commands.LoadPhotos;
+using Application.Users.Queries.GetPhotos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,13 @@ namespace Blog.Controllers
             [FromForm(Name = "model")] LoadPhotosCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpGet("{userId}/photos")]
+        public async Task<ActionResult<GetPhotosResponseDto>> GetPhotos(
+            [FromQuery] GetPhotosQuery query)
+        {
+            return await Mediator.Send(query);
         }
     }
 }
