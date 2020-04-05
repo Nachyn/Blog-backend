@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Application;
 using Blog.Common.Extensions;
 using Blog.Common.Middlewares;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Converters;
 
 namespace Blog
 {
@@ -32,7 +34,17 @@ namespace Blog
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddControllers()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(
+                        new JsonStringEnumConverter());
+                })
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.Converters.Add(
+                        new StringEnumConverter());
+                });
 
             services.AddInfrastructure(Configuration);
             services.AddApplication(Configuration, WebHostEnvironment.ContentRootPath);
@@ -86,12 +98,12 @@ namespace Blog
             app.UseCustomExceptionHandler();
             app.UseHealthChecks("/health");
 
-            const string SpecificationRoute = "/api/specification.json";
-            app.UseOpenApi(settings => settings.Path = SpecificationRoute);
+            const string specificationRoute = "/api/specification.json";
+            app.UseOpenApi(settings => settings.Path = specificationRoute);
             app.UseSwaggerUi3(settings =>
             {
                 settings.Path = "/api";
-                settings.DocumentPath = SpecificationRoute;
+                settings.DocumentPath = specificationRoute;
             });
 
             app.UseRouting();
