@@ -1,4 +1,5 @@
-﻿using Application.Common.Mappings;
+﻿using System;
+using Application.Common.Mappings;
 using Domain.Entities;
 
 namespace Application.Users.Commands.LoadPhotos
@@ -8,5 +9,7 @@ namespace Application.Users.Commands.LoadPhotos
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public DateTime LoadedUtc { get; set; }
     }
 }
