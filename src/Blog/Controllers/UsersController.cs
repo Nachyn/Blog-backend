@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Application.Users.Commands.DeletePhotos;
 using Application.Users.Commands.LoadPhotos;
 using Application.Users.Queries.GetPhotos;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,14 @@ namespace Blog.Controllers
             [FromQuery] GetPhotosQuery query)
         {
             return await Mediator.Send(query);
+        }
+
+        [Authorize]
+        [HttpDelete("photos")]
+        public async Task<ActionResult<DeletePhotosResponseDto>> DeletePhotos(
+            [FromBody] DeletePhotosCommand command)
+        {
+            return await Mediator.Send(command);
         }
     }
 }
