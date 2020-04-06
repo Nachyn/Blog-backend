@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Application.Common.AppSettingHelpers.Configurations;
 using Application.Common.Behaviours;
+using Application.Common.Extensions;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
 using Application.Common.Services;
@@ -29,7 +30,8 @@ namespace Application
 
             //Для проверки конфига на старте, а не в момент обращения к IMapper.
             //services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            var mapperConfiguration = new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
+            var mapperConfiguration =
+                new MapperConfiguration(mc => mc.AddProfile(new MappingProfile()));
             mapperConfiguration.AssertConfigurationIsValid();
             services.AddSingleton(mapperConfiguration.CreateMapper());
 
@@ -44,6 +46,7 @@ namespace Application
             services.AddHttpContextAccessor();
             services.AddTransient<IUserAccessor, UserAccessor>();
 
+            services.AddPropertyValidatorsFromAssembly();
             return services;
         }
     }
