@@ -129,6 +129,9 @@
   <data name="IdRange" xml:space="preserve">
     <value>Идентификатор должен быть больше 0.</value>
   </data>
+  <data name="IdsEmpty" xml:space="preserve">
+    <value>Введите идентификаторы.</value>
+  </data>
   <data name="NumberPageRange" xml:space="preserve">
     <value>Номер страницы должен быть больше 0.</value>
   </data>
