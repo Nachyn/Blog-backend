@@ -10,7 +10,7 @@ namespace Application.Users.Queries.GetPhotos
         {
             RuleFor(v => v)
                 .SetValidator(paginationValidator);
-            RuleFor(v => v.UserId)
+            RuleFor(v => (int?) v.UserId)
                 .SetValidator(idValidator);
         }
     }

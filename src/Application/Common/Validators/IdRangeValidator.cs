@@ -3,7 +3,7 @@ using Microsoft.Extensions.Localization;
 
 namespace Application.Common.Validators
 {
-    public class IdRangeValidator : AbstractValidator<int>
+    public class IdRangeValidator : AbstractValidator<int?>
     {
         public IdRangeValidator(IStringLocalizer<CommonValidatorsResource> commonLocalizer)
         {
