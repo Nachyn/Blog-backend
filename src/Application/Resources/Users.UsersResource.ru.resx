@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="PhotoNotFound" xml:space="preserve">
+    <value>Фото не найдено.</value>
+  </data>
   <data name="PhotosEmpty" xml:space="preserve">
     <value>Добавьте фотографии.</value>
+  </data>
+  <data name="UsernameInvalid" xml:space="preserve">
+    <value>Имя пользователя может содержать от {0} до {1} латинских букв и цифр.</value>
   </data>
   <data name="UserNull" xml:space="preserve">
     <value>Пользователь не найден.</value>
