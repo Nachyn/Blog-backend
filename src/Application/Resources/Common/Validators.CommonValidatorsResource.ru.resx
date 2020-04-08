@@ -147,4 +147,7 @@
   <data name="PhotoNull" xml:space="preserve">
     <value>Фото не найдено.</value>
   </data>
+  <data name="UsernameInvalid" xml:space="preserve">
+    <value>Имя пользователя может содержать от {0} до {1} латинских букв и цифр.</value>
+  </data>
 </root>

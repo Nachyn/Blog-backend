@@ -123,9 +123,6 @@
   <data name="PhotosEmpty" xml:space="preserve">
     <value>Добавьте фотографии.</value>
   </data>
-  <data name="UsernameInvalid" xml:space="preserve">
-    <value>Имя пользователя может содержать от {0} до {1} латинских букв и цифр.</value>
-  </data>
   <data name="UserNull" xml:space="preserve">
     <value>Пользователь не найден.</value>
   </data>

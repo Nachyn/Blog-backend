@@ -135,7 +135,4 @@
   <data name="UnableLogin" xml:space="preserve">
     <value>Пользователь не найден или введены неверные данные.</value>
   </data>
-  <data name="UsernameValid" xml:space="preserve">
-    <value>Имя пользователя может содержать от {0} до {1} латинских букв и цифр.</value>
-  </data>
 </root>
