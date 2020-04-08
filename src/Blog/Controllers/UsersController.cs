@@ -2,6 +2,7 @@
 using Application.Users.Commands.DeletePhotos;
 using Application.Users.Commands.LoadPhotos;
 using Application.Users.Commands.UpdateInfo;
+using Application.Users.Queries.FindUser;
 using Application.Users.Queries.GetPhotos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,13 @@ namespace Blog.Controllers
             [FromBody] UpdateInfoCommand command)
         {
             return await Mediator.Send(command);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<FindUserResponseDto>> FindUser(
+            [FromQuery] FindUserQuery query)
+        {
+            return await Mediator.Send(query);
         }
     }
 }
