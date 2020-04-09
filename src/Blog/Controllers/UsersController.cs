@@ -4,6 +4,7 @@ using Application.Users.Commands.LoadPhotos;
 using Application.Users.Commands.UpdateInfo;
 using Application.Users.Queries.FindUser;
 using Application.Users.Queries.GetPhotos;
+using Application.Users.Queries.GetUserInfo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +52,13 @@ namespace Blog.Controllers
         [HttpGet]
         public async Task<ActionResult<FindUserResponseDto>> FindUser(
             [FromQuery] FindUserQuery query)
+        {
+            return await Mediator.Send(query);
+        }
+
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<GetUserInfoResponseDto>> GetUserInfo(
+            [FromRoute] GetUserInfoQuery query)
         {
             return await Mediator.Send(query);
         }
