@@ -6,6 +6,7 @@
     <NeutralLanguage>en</NeutralLanguage>
     <DocumentationFile>Blog.xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>5a928a7c-4c30-4473-b2f9-5d1dec56c239</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

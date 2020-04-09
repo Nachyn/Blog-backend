@@ -23,6 +23,7 @@ namespace Infrastructure
 
             services.AddTransient<IDateTime, DateTimeService>();
             services.AddSingleton<IFileService, FileService>();
+            services.AddSingleton<IEmailService, EmailService>();
 
             return services;
         }
