@@ -8,5 +8,7 @@ namespace Application.Users.Queries.FindUser
         public int Id { get; set; }
 
         public string UserName { get; set; }
+
+        public int? AvatarPhotoId { get; set; }
     }
 }
