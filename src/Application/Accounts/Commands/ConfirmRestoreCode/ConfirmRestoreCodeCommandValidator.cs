@@ -2,19 +2,19 @@
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace Application.Accounts.Commands.CreateAccount
+namespace Application.Accounts.Commands.ConfirmRestoreCode
 {
-    public class CreateAccountCommandValidator : AbstractValidator<CreateAccountCommand>
+    public class ConfirmRestoreCodeCommandValidator : AbstractValidator<ConfirmRestoreCodeCommand>
     {
-        public CreateAccountCommandValidator(UserNameValidator userNameValidator
-            , EmailValidator emailValidator
+        public ConfirmRestoreCodeCommandValidator(EmailValidator emailValidator
             , IStringLocalizer<AccountsResource> accountLocalizer)
         {
             RuleFor(v => v.Email)
                 .SetValidator(emailValidator);
 
-            RuleFor(v => v.Username)
-                .SetValidator(userNameValidator);
+            RuleFor(v => v.Code)
+                .Must(c => !string.IsNullOrWhiteSpace(c))
+                .WithMessage(accountLocalizer["EnterCode"]);
 
             RuleFor(v => v.Password)
                 .Must(p => !string.IsNullOrWhiteSpace(p))

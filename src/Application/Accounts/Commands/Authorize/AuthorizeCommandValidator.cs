@@ -23,7 +23,7 @@ namespace Application.Accounts.Commands.Authorize
 
             var enterPassword = accountLocalizer["EnterPassword"];
             RuleFor(v => v.Password)
-                .NotEmpty()
+                .Must(p => !string.IsNullOrWhiteSpace(p))
                 .When(c => !string.IsNullOrWhiteSpace(c.Type)
                            && c.Type.Equals(Token.TypePassword
                                , StringComparison.OrdinalIgnoreCase))
@@ -31,7 +31,7 @@ namespace Application.Accounts.Commands.Authorize
 
             var enterRefreshToken = accountLocalizer["EnterRefreshToken"];
             RuleFor(v => v.RefreshToken)
-                .NotEmpty()
+                .Must(p => !string.IsNullOrWhiteSpace(p))
                 .When(c => !string.IsNullOrWhiteSpace(c.Type)
                            && c.Type.Equals(Token.TypeRefresh
                                , StringComparison.OrdinalIgnoreCase))

@@ -120,6 +120,12 @@
   <data name="CodeSent" xml:space="preserve">
     <value>Если пользователь с такой почтой зарегистрирован, то мы отправим ему пароль.</value>
   </data>
+  <data name="ConfirmCodeSuccessfully" xml:space="preserve">
+    <value>Пароль успешно изменен.</value>
+  </data>
+  <data name="EnterCode" xml:space="preserve">
+    <value>Введите код восстановления.</value>
+  </data>
   <data name="EnterPassword" xml:space="preserve">
     <value>Введите пароль.</value>
   </data>
@@ -137,5 +143,8 @@
   </data>
   <data name="UnableLogin" xml:space="preserve">
     <value>Пользователь не найден или введены неверные данные.</value>
+  </data>
+  <data name="UserNull" xml:space="preserve">
+    <value>Пользователь не найден.</value>
   </data>
 </root>

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Application.Accounts.Commands.Authorize;
+using Application.Accounts.Commands.ConfirmRestoreCode;
 using Application.Accounts.Commands.CreateAccount;
 using Application.Accounts.Commands.SendRestoreCode;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,13 @@ namespace Blog.Controllers
         [HttpPost("restore/sendCode")]
         public async Task<SendRestoreCodeResponseDto> SendRestoreCode(
             [FromBody] SendRestoreCodeCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+
+        [HttpPost("restore/confirmCode")]
+        public async Task<ConfirmRestoreCodeResponseDto> ConfirmRestoreCode(
+            [FromBody] ConfirmRestoreCodeCommand command)
         {
             return await Mediator.Send(command);
         }
