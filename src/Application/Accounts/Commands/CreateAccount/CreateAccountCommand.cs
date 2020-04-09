@@ -23,9 +23,9 @@ namespace Application.Accounts.Commands.CreateAccount
         public class CreateAccountCommandHandler
             : IRequestHandler<CreateAccountCommand, CreateAccountUserInfoDto>
         {
-            private readonly UserManager<AppUser> _userManager;
-
             private readonly IMapper _mapper;
+            
+            private readonly UserManager<AppUser> _userManager;
 
             public CreateAccountCommandHandler(UserManager<AppUser> userManager
                 , IMapper mapper)
@@ -39,7 +39,8 @@ namespace Application.Accounts.Commands.CreateAccount
             {
                 var user = new AppUser
                 {
-                    Email = request.Email, UserName = request.Username
+                    Email = request.Email.ToLower(),
+                    UserName = request.Username
                 };
 
                 var createResult = await _userManager.CreateAsync(user, request.Password);

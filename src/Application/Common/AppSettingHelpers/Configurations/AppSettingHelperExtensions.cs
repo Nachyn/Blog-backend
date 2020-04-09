@@ -18,6 +18,9 @@ namespace Application.Common.AppSettingHelpers.Configurations
             services.Configure<AdminAccount>(
                 configuration.GetSection(nameof(AdminAccount)));
 
+            services.Configure<EmailServiceSettings>(
+                configuration.GetSection(nameof(EmailServiceSettings)));
+
             services.Configure<PasswordIdentitySettings>(
                 configuration.GetSection(nameof(PasswordIdentitySettings)));
 
@@ -50,10 +53,10 @@ namespace Application.Common.AppSettingHelpers.Configurations
             IServiceCollection services
             , IConfiguration configuration)
         {
-            const string EntitySection = "EntityOptions:";
+            const string entitySection = "EntitySettings:";
 
-            services.Configure<AppUserOptions>(
-                configuration.GetSection($"{EntitySection}AppUser"));
+            services.Configure<AppUserSettings>(
+                configuration.GetSection($"{entitySection}AppUser"));
         }
     }
 }

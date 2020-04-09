@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.AppSettingHelpers.Entities
 {
-    public class AppUserOptions
+    public class AppUserSettings
     {
         public int EmailMaxLength { get; set; }
 

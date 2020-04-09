@@ -1,4 +1,5 @@
 ﻿using System;
+using Application.Common.Validators;
 using Domain.Entities;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -8,7 +9,8 @@ namespace Application.Accounts.Commands.Authorize
     public class AuthorizeCommandValidator : AbstractValidator<AuthorizeCommand>
     {
         public AuthorizeCommandValidator(
-            IStringLocalizer<AccountsResource> accountLocalizer)
+            IStringLocalizer<AccountsResource> accountLocalizer
+            , EmailValidator emailValidator)
         {
             RuleFor(v => v.Type)
                 .Must(BeValidType)
@@ -16,12 +18,8 @@ namespace Application.Accounts.Commands.Authorize
                     , Token.TypePassword
                     , Token.TypeRefresh]);
 
-            var emailValid = accountLocalizer["EmailValid"];
             RuleFor(v => v.Email)
-                .NotNull()
-                .WithMessage(emailValid)
-                .EmailAddress()
-                .WithMessage(emailValid);
+                .SetValidator(emailValidator);
 
             var enterPassword = accountLocalizer["EnterPassword"];
             RuleFor(v => v.Password)

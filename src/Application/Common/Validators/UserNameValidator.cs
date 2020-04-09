@@ -8,15 +8,15 @@ namespace Application.Common.Validators
 {
     public class UserNameValidator : PropertyValidator
     {
-        private readonly AppUserOptions _appUserOptions;
+        private readonly AppUserSettings _appUserSettings;
 
         public UserNameValidator(IStringLocalizer<CommonValidatorsResource> commonLocalizer
-            , IOptions<AppUserOptions> appUserOptions)
+            , IOptions<AppUserSettings> appUserOptions)
             : base(commonLocalizer["UsernameInvalid"
                 , appUserOptions.Value.UsernameMinLength
                 , appUserOptions.Value.UsernameMaxLength])
         {
-            _appUserOptions = appUserOptions.Value;
+            _appUserSettings = appUserOptions.Value;
         }
 
         protected override bool IsValid(PropertyValidatorContext context)
@@ -24,9 +24,9 @@ namespace Application.Common.Validators
             var username = (string) context.PropertyValue;
 
             return !string.IsNullOrWhiteSpace(username)
-                   && username.Length >= _appUserOptions.UsernameMinLength
-                   && username.Length <= _appUserOptions.UsernameMaxLength
-                   && Regex.IsMatch(username, _appUserOptions.UsernameRegex);
+                   && username.Length >= _appUserSettings.UsernameMinLength
+                   && username.Length <= _appUserSettings.UsernameMaxLength
+                   && Regex.IsMatch(username, _appUserSettings.UsernameRegex);
         }
     }
 }
