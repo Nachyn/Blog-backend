@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.Common.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -11,9 +13,8 @@ namespace Blog.Common.Middlewares
 {
     public class CustomExceptionHandlerMiddleware
     {
-        private readonly RequestDelegate _next;
-
         private readonly ILogger<CustomExceptionHandlerMiddleware> _logger;
+        private readonly RequestDelegate _next;
 
         public CustomExceptionHandlerMiddleware(RequestDelegate next
             , ILogger<CustomExceptionHandlerMiddleware> logger)
@@ -38,30 +39,41 @@ namespace Blog.Common.Middlewares
         {
             var code = HttpStatusCode.InternalServerError;
 
-            var result = string.Empty;
+            IDictionary<string, string[]> result = null;
 
             switch (exception)
             {
                 case ValidationException validationException:
                     code = HttpStatusCode.BadRequest;
-                    result = JsonConvert.SerializeObject(validationException.Failures);
+                    result = validationException.Failures;
                     break;
-                case NotFoundException _:
+
+                case NotFoundException notFoundException:
                     code = HttpStatusCode.NotFound;
+                    result = notFoundException.Failures;
+                    break;
+
+                default:
+                    _logger.LogError(exception, exception.Message);
                     break;
             }
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int) code;
 
-            if (string.IsNullOrEmpty(result))
+            if (result.IsNullOrEmpty())
             {
-                result = JsonConvert.SerializeObject(new {error = exception.Message});
+                return Task.CompletedTask;
             }
 
-            _logger.LogError(exception, exception.Message);
+            var errors = new List<string>();
+            foreach (var error in result)
+            {
+                errors.AddRange(error.Value);
+            }
 
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(
+                JsonConvert.SerializeObject(new {errors}));
         }
     }
 

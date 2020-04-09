@@ -1,12 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Application.Common.Exceptions
 {
     public class NotFoundException : Exception
     {
-        public NotFoundException(string name, object key)
-            : base($"Entity \"{name}\" ({key}) was not found.")
+        public NotFoundException()
+            : base("One or more entities were not found.")
         {
+            Failures = new Dictionary<string, string[]>();
         }
+
+        public NotFoundException(params string[] errors)
+            : this()
+        {
+            if (errors != null)
+            {
+                Failures.Add(string.Empty, errors);
+            }
+        }
+
+        public IDictionary<string, string[]> Failures { get; }
     }
 }
