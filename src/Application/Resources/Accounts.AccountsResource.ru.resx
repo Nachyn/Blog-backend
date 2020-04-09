@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EmailValid" xml:space="preserve">
-    <value>Некорректная почта.</value>
+  <data name="CodeSent" xml:space="preserve">
+    <value>Если пользователь с такой почтой зарегистрирован, то мы отправим ему пароль.</value>
   </data>
   <data name="EnterPassword" xml:space="preserve">
     <value>Введите пароль.</value>
@@ -131,6 +131,9 @@
   </data>
   <data name="RefreshTokenInvalid" xml:space="preserve">
     <value>Некорректный или истекший refresh токен.</value>
+  </data>
+  <data name="RestoreAccountSubject" xml:space="preserve">
+    <value>Код восстановления</value>
   </data>
   <data name="UnableLogin" xml:space="preserve">
     <value>Пользователь не найден или введены неверные данные.</value>

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Application.Accounts.Commands.Authorize;
 using Application.Accounts.Commands.CreateAccount;
+using Application.Accounts.Commands.SendRestoreCode;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.Controllers
@@ -18,6 +19,13 @@ namespace Blog.Controllers
         [HttpPost("auth")]
         public async Task<ActionResult<AuthorizeResponseDto>> Authorize(
             [FromBody] AuthorizeCommand command)
+        {
+            return await Mediator.Send(command);
+        }
+
+        [HttpPost("restore/sendCode")]
+        public async Task<SendRestoreCodeResponseDto> SendRestoreCode(
+            [FromBody] SendRestoreCodeCommand command)
         {
             return await Mediator.Send(command);
         }
