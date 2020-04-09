@@ -10,7 +10,8 @@ namespace Infrastructure.Persistence.Configurations
         {
             builder.HasOne(u => u.AvatarPhoto)
                 .WithMany(p => p.AvatarOwners)
-                .HasForeignKey(u => u.AvatarPhotoId);
+                .HasForeignKey(u => u.AvatarPhotoId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
