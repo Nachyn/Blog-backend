@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Application.Posts.Commands.CreatePost;
+using Application.Posts.Commands.DeleteFiles;
 using Application.Posts.Commands.LoadFiles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace Blog.Controllers
     {
         [Authorize]
         [HttpPost]
-        public async Task<CreatePostResponseDto> CreatePost(
+        public async Task<ActionResult<CreatePostResponseDto>> CreatePost(
             [FromBody] CreatePostCommand command)
         {
             return await Mediator.Send(command);
@@ -19,9 +20,18 @@ namespace Blog.Controllers
 
         [Authorize]
         [HttpPost("{postId}/files")]
-        public async Task<LoadFilesResponseDto> LoadFiles(
+        public async Task<ActionResult<LoadFilesResponseDto>> LoadFiles(
             [FromForm] LoadFilesCommand command)
         {
+            return await Mediator.Send(command);
+        }
+
+        [Authorize]
+        [HttpDelete("{postId}/files")]
+        public async Task<ActionResult<DeleteFilesResponseDto>> DeleteFiles(
+            [FromRoute] int postId, [FromBody] DeleteFilesCommand command)
+        {
+            command.PostId = postId;
             return await Mediator.Send(command);
         }
     }

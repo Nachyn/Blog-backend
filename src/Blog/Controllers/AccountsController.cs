@@ -25,14 +25,14 @@ namespace Blog.Controllers
         }
 
         [HttpPost("restore/sendCode")]
-        public async Task<SendRestoreCodeResponseDto> SendRestoreCode(
+        public async Task<ActionResult<SendRestoreCodeResponseDto>> SendRestoreCode(
             [FromBody] SendRestoreCodeCommand command)
         {
             return await Mediator.Send(command);
         }
 
         [HttpPost("restore/confirmCode")]
-        public async Task<ConfirmRestoreCodeResponseDto> ConfirmRestoreCode(
+        public async Task<ActionResult<ConfirmRestoreCodeResponseDto>> ConfirmRestoreCode(
             [FromBody] ConfirmRestoreCodeCommand command)
         {
             return await Mediator.Send(command);
