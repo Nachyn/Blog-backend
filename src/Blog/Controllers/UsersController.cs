@@ -29,15 +29,10 @@ namespace Blog.Controllers
             _photosDirectory = photosDirectory.Value;
         }
 
-        /// <summary>
-        ///     Form key = model.Photos
-        /// </summary>
-        /// <param name="command"></param>
-        /// <returns></returns>
         [Authorize]
         [HttpPost("photos")]
         public async Task<ActionResult<LoadPhotosResponseDto>> LoadPhotos(
-            [FromForm(Name = "model")] LoadPhotosCommand command)
+            [FromForm] LoadPhotosCommand command)
         {
             return await Mediator.Send(command);
         }
