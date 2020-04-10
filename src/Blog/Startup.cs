@@ -46,17 +46,9 @@ namespace Blog
                         new StringEnumConverter());
                 });
 
-            services.Configure<ApiBehaviorOptions>(options =>
-                options.SuppressModelStateInvalidFilter = true);
-
             services.AddInfrastructure(Configuration);
             services.AddApplication(Configuration, WebHostEnvironment.ContentRootPath);
             services.AddAspIdentityJwt(Configuration);
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
 
             services.AddCors(options =>
             {
