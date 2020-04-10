@@ -43,6 +43,9 @@ namespace Blog.Common.Extensions
                         passwordIdentitySettings.RequireDigit;
 
                     options.User.RequireUniqueEmail = true;
+
+                    options.Tokens.PasswordResetTokenProvider =
+                        TokenOptions.DefaultPhoneProvider;
                 })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddUserStore<UserStore<AppUser, IdentityRole<int>
