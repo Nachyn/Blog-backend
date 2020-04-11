@@ -4,6 +4,7 @@ using Application.Common.AppSettingHelpers.Main;
 using Application.Common.Interfaces;
 using Application.Posts.Commands.CreatePost;
 using Application.Posts.Commands.DeleteFiles;
+using Application.Posts.Commands.DeletePosts;
 using Application.Posts.Commands.LoadFiles;
 using Application.Posts.Commands.UpdatePost;
 using Application.Posts.Queries.DownloadFile;
@@ -50,6 +51,14 @@ namespace Blog.Controllers
             [FromQuery] GetPostsQuery query)
         {
             return await Mediator.Send(query);
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task<ActionResult<DeletePostsResponseDto>> DeletePosts(
+            [FromBody] DeletePostsCommand command)
+        {
+            return await Mediator.Send(command);
         }
 
         [Authorize]
