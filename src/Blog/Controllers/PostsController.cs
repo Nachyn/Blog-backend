@@ -5,6 +5,7 @@ using Application.Common.Interfaces;
 using Application.Posts.Commands.CreatePost;
 using Application.Posts.Commands.DeleteFiles;
 using Application.Posts.Commands.LoadFiles;
+using Application.Posts.Commands.UpdatePost;
 using Application.Posts.Queries.DownloadFile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,15 @@ namespace Blog.Controllers
         public async Task<ActionResult<CreatePostResponseDto>> CreatePost(
             [FromBody] CreatePostCommand command)
         {
+            return await Mediator.Send(command);
+        }
+
+        [Authorize]
+        [HttpPut("{postId}")]
+        public async Task<ActionResult<UpdatePostResponseDto>> UpdatePost(
+            [FromRoute] int postId, [FromBody] UpdatePostCommand command)
+        {
+            command.PostId = postId;
             return await Mediator.Send(command);
         }
 
