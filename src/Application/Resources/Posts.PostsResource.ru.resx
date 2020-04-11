@@ -129,4 +129,7 @@
   <data name="PostNull" xml:space="preserve">
     <value>Пост не найден.</value>
   </data>
+  <data name="UserNull" xml:space="preserve">
+    <value>Пользователь не найден.</value>
+  </data>
 </root>

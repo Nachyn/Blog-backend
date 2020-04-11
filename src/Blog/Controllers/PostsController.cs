@@ -7,6 +7,7 @@ using Application.Posts.Commands.DeleteFiles;
 using Application.Posts.Commands.LoadFiles;
 using Application.Posts.Commands.UpdatePost;
 using Application.Posts.Queries.DownloadFile;
+using Application.Posts.Queries.GetPosts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -42,6 +43,13 @@ namespace Blog.Controllers
         {
             command.PostId = postId;
             return await Mediator.Send(command);
+        }
+
+        [HttpGet("users/{userId}")]
+        public async Task<ActionResult<GetPostsResponseDto>> GetPosts(
+            [FromQuery] GetPostsQuery query)
+        {
+            return await Mediator.Send(query);
         }
 
         [Authorize]
