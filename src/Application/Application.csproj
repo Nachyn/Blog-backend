@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="Accounts\Queries\" />
-    <Folder Include="Posts\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,31 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
+using Application.Common.AppSettingHelpers.Main;
+using Application.Common.Interfaces;
 using Application.Posts.Commands.CreatePost;
 using Application.Posts.Commands.DeleteFiles;
 using Application.Posts.Commands.LoadFiles;
+using Application.Posts.Queries.DownloadFile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Blog.Controllers
 {
     [Route("api/posts")]
     public class PostsController : ApiController
     {
+        private readonly FilesDirectory _filesDirectory;
+
+        private readonly IFileService _fileService;
+
+        public PostsController(IFileService fileService
+            , IOptions<FilesDirectory> filesDirectory)
+        {
+            _fileService = fileService;
+            _filesDirectory = filesDirectory.Value;
+        }
+
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<CreatePostResponseDto>> CreatePost(
@@ -33,6 +49,16 @@ namespace Blog.Controllers
         {
             command.PostId = postId;
             return await Mediator.Send(command);
+        }
+
+        [HttpGet("files/{fileId}")]
+        public async Task<ActionResult> DownloadFile(
+            [FromRoute] DownloadFileQuery query)
+        {
+            var file = await Mediator.Send(query);
+
+            return _fileService.GetFileFromStorage(
+                Path.Combine(_filesDirectory.Posts, file.Path), file.Name);
         }
     }
 }

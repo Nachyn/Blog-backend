@@ -120,6 +120,9 @@
   <data name="EnterText" xml:space="preserve">
     <value>Введите текст.</value>
   </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>Файл не найден.</value>
+  </data>
   <data name="FilesEmpty" xml:space="preserve">
     <value>Добавьте файлы.</value>
   </data>
