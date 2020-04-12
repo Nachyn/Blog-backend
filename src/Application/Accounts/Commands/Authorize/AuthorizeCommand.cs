@@ -71,7 +71,7 @@ namespace Application.Accounts.Commands.Authorize
                     Token.TypeRefresh => await GenerateNewTokenUsingRefreshAsync(request,
                         cancellationToken),
 
-                    _ => throw new ArgumentNullException()
+                    _ => throw new ArgumentOutOfRangeException()
                 };
             }
 
