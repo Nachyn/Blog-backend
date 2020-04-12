@@ -17,11 +17,14 @@ namespace Infrastructure.Persistence
             RoleManager<IdentityRole<int>> roleManager, IConfiguration configuration,
             AppDbContext context)
         {
-            await context.Database.MigrateAsync();
+            if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                await context.Database.MigrateAsync();
 
-            //For .OrderBy(i => Guid.NewGuid())
-            await context.Database.ExecuteSqlRawAsync(
-                "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"");
+                //For .OrderBy(i => Guid.NewGuid())
+                await context.Database.ExecuteSqlRawAsync(
+                    "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"");
+            }
 
             var adminAccount =
                 configuration.GetSection(nameof(AdminAccount)).Get<AdminAccount>();
