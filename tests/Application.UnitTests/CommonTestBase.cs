@@ -86,7 +86,7 @@ namespace Application.UnitTests
                 .GetSection(nameof(PasswordIdentitySettings))
                 .Get<PasswordIdentitySettings>();
 
-            return new UserManager<AppUser>(
+            var userManager = new UserManager<AppUser>(
                 new UserStore<AppUser, IdentityRole<int>, AppDbContext, int>(Context)
                 , Options.Create(new IdentityOptions
                 {
@@ -114,6 +114,11 @@ namespace Application.UnitTests
                 , new IdentityErrorDescriber()
                 , null
                 , Substitute.For<ILogger<UserManager<AppUser>>>());
+
+            userManager.RegisterTokenProvider(TokenOptions.DefaultPhoneProvider
+                , new PhoneNumberTokenProvider<AppUser>());
+
+            return userManager;
         }
 
         private RoleManager<IdentityRole<int>> CreateRoleManager()
