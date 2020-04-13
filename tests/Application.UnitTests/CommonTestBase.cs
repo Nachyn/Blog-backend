@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.Common.AppSettingHelpers.Main;
 using Application.Common.Interfaces;
 using Application.Common.Mappings;
+using Application.Common.Validators;
 using AutoMapper;
 using Domain.Entities;
 using Infrastructure.Persistence;
@@ -10,6 +11,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
@@ -20,19 +22,19 @@ namespace Application.UnitTests
 {
     public class CommonTestBase
     {
-        protected EmptyConstraint IsNotNullOrEmpty => Is.Not.Null.And.Not.Empty;
-
-        protected string DefaultUserEmail;
-
-        protected int DefaultUserId;
-
-        protected string DefaultUserPassword;
+        protected IStringLocalizer<CommonValidatorsResource> CommonLocalizer;
 
         protected IConfiguration Configuration;
 
         protected AppDbContext Context;
 
         protected IDateTime DateTimeService;
+
+        protected string DefaultUserEmail;
+
+        protected int DefaultUserId;
+
+        protected string DefaultUserPassword;
 
         protected IMapper Mapper;
 
@@ -51,7 +53,10 @@ namespace Application.UnitTests
             DateTimeService = new DateTimeService();
             Configuration = CreateConfiguration();
             InitializeDefaultFields();
+            CommonLocalizer = TestHelpers.MockLocalizer<CommonValidatorsResource>();
         }
+
+        protected EmptyConstraint IsNotNullOrEmpty => Is.Not.Null.And.Not.Empty;
 
         [SetUp]
         public virtual async Task InitializeDatabase()

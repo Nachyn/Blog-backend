@@ -1,5 +1,7 @@
 ﻿using Application.Accounts;
+using Application.Common.AppSettingHelpers.Entities;
 using Application.Common.AppSettingHelpers.Main;
+using Application.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
@@ -11,7 +13,11 @@ namespace Application.UnitTests.Accounts
     {
         protected IStringLocalizer<AccountsResource> AccountLocalizer;
 
+        protected IOptions<AppUserSettings> AppUserSettingOptions;
+
         protected IOptions<AuthOptions> AuthOptionsOptions;
+
+        protected IEmailService EmailService;
 
         public AccountsTestBase()
         {
@@ -19,7 +25,13 @@ namespace Application.UnitTests.Accounts
                 .GetSection(nameof(AuthOptions))
                 .Get<AuthOptions>());
 
-            AccountLocalizer = Substitute.For<IStringLocalizer<AccountsResource>>();
+            AppUserSettingOptions = Options.Create(Configuration
+                .GetSection("EntitySettings:AppUser")
+                .Get<AppUserSettings>());
+
+            AccountLocalizer = TestHelpers.MockLocalizer<AccountsResource>();
+
+            EmailService = Substitute.For<IEmailService>();
         }
     }
 }
