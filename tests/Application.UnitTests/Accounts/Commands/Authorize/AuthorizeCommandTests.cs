@@ -21,7 +21,7 @@ namespace Application.UnitTests.Accounts.Commands.Authorize
         }
 
         [Test]
-        public async Task Handle_MustAuthorize()
+        public async Task Handle_ShouldBeAuthorized()
         {
             var command = new AuthorizeCommand
             {
