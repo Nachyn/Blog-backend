@@ -28,7 +28,7 @@ namespace Application.UnitTests.Accounts.Commands.Authorize
         }
 
         [Test]
-        public void IsValid_ShouldBeFalse()
+        public void IsValid_ShouldHaveValidationError()
         {
             var validator = GetNewValidator();
 

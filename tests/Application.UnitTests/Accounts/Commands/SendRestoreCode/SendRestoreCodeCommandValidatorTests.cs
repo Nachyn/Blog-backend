@@ -26,7 +26,7 @@ namespace Application.UnitTests.Accounts.Commands.SendRestoreCode
         }
 
         [Test]
-        public void IsValid_ShouldBeFalse()
+        public void IsValid_ShouldHaveValidationError()
         {
             var validator = GetNewValidator();
 
