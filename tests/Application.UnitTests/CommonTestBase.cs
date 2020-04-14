@@ -7,6 +7,8 @@ using Application.Common.Mappings;
 using Application.Common.Validators;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
+using Domain.Helpers;
 using Infrastructure.Persistence;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
@@ -37,6 +39,8 @@ namespace Application.UnitTests
         protected int DefaultUserId;
 
         protected string DefaultUserPassword;
+
+        protected string DefaultUserUsername;
 
         protected IMapper Mapper;
 
@@ -161,6 +165,7 @@ namespace Application.UnitTests
             DefaultUserEmail = adminAccount.Email;
             DefaultUserPassword = adminAccount.Password;
             DefaultUserId = 1;
+            DefaultUserUsername = Roles.Admin.GetEnumDescription();
         }
 
         private IUserAccessor CreateUserAccessor()

@@ -31,6 +31,7 @@ namespace Application.UnitTests.Users.Commands.LoadPhotos
 
             var result = await handler.Handle(command, CancellationToken.None);
 
+            Assert.That(result.Photos, IsNotNullOrEmpty);
             result.Photos.ForEach(p =>
             {
                 Assert.That(p.Id > 0);
