@@ -37,6 +37,7 @@ namespace Application.UnitTests.Users.Commands.LoadPhotos
                 Assert.That(p.Id > 0);
                 Assert.That(DateTimeService.NowUtc > p.LoadedUtc);
                 Assert.That(command.Photos.Select(f => f.FileName).Contains(p.Name));
+                Assert.That(Context.UserPhotos.Any(f => f.Id == p.Id));
             });
         }
     }
