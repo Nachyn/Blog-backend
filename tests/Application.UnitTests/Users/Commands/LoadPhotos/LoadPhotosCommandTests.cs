@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Application.Users.Commands.LoadPhotos;
 using NUnit.Framework;
 
-namespace Application.UnitTests.Users.LoadPhotos
+namespace Application.UnitTests.Users.Commands.LoadPhotos
 {
     public class LoadPhotosCommandTests : UsersTestBase
     {

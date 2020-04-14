@@ -4,7 +4,7 @@ using Application.Users.Commands.DeletePhotos;
 using FluentValidation.TestHelper;
 using NUnit.Framework;
 
-namespace Application.UnitTests.Users.DeletePhotos
+namespace Application.UnitTests.Users.Commands.DeletePhotos
 {
     public class DeletePhotosCommandValidatorTests : UsersTestBase
     {

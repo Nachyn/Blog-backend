@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Application.UnitTests.Users.LoadPhotos
+namespace Application.UnitTests.Users.Commands.LoadPhotos
 {
     public class LoadPhotosCommandValidatorTests : UsersTestBase
     {

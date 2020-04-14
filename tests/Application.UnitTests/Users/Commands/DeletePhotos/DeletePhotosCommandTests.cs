@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Application.Users.Commands.DeletePhotos;
 using NUnit.Framework;
 
-namespace Application.UnitTests.Users.DeletePhotos
+namespace Application.UnitTests.Users.Commands.DeletePhotos
 {
     public class DeletePhotosCommandTests : UsersTestBase
     {
