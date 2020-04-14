@@ -20,11 +20,15 @@ namespace Application.UnitTests.Posts
 
         protected int DefaultPostId;
 
-        protected IStringLocalizer<PostsResource> PostLocalizer;
-
         protected IFileService FileService;
 
+        protected IStringLocalizer<PostsResource> PostLocalizer;
+
         protected IOptions<FilesDirectory> FilesDirectory;
+
+        protected IOptions<FileSettings> FileSettings;
+
+        protected IOptions<RootFileFolderDirectory> RootDirectoryOptions;
 
         public PostsTestBase()
         {
@@ -34,6 +38,15 @@ namespace Application.UnitTests.Posts
             FilesDirectory = Options.Create(Configuration
                 .GetSection(nameof(FilesDirectory))
                 .Get<FilesDirectory>());
+
+            RootDirectoryOptions = Options.Create(new RootFileFolderDirectory
+            {
+                RootFileFolder = "rootFiles"
+            });
+
+            FileSettings = Options.Create(Configuration
+                .GetSection(nameof(FileSettings))
+                .Get<FileSettings>());
         }
 
         public override async Task InitializeDatabase()
