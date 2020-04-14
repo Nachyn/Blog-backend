@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Application.Common.AppSettingHelpers.Main;
 using Application.Common.Interfaces;
@@ -10,6 +11,7 @@ using Infrastructure.Persistence;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -40,6 +42,8 @@ namespace Application.UnitTests
 
         protected RoleManager<IdentityRole<int>> RoleManager;
 
+        protected IUserAccessor UserAccessor;
+
         protected UserManager<AppUser> UserManager;
 
         public CommonTestBase()
@@ -54,6 +58,8 @@ namespace Application.UnitTests
             Configuration = CreateConfiguration();
             InitializeDefaultFields();
             CommonLocalizer = TestHelpers.MockLocalizer<CommonValidatorsResource>();
+
+            UserAccessor = CreateUserAccessor();
         }
 
         protected EmptyConstraint IsNotNullOrEmpty => Is.Not.Null.And.Not.Empty;
@@ -78,6 +84,12 @@ namespace Application.UnitTests
             AppDbContextFactory.Destroy(Context);
             UserManager.Dispose();
             RoleManager.Dispose();
+        }
+
+        public void DetachAllEntities()
+        {
+            Context.ChangeTracker.Entries().ToList()
+                .ForEach(e => e.State = EntityState.Detached);
         }
 
         private UserManager<AppUser> CreateUserManager()
@@ -149,6 +161,13 @@ namespace Application.UnitTests
             DefaultUserEmail = adminAccount.Email;
             DefaultUserPassword = adminAccount.Password;
             DefaultUserId = 1;
+        }
+
+        private IUserAccessor CreateUserAccessor()
+        {
+            var userAccessor = Substitute.For<IUserAccessor>();
+            userAccessor.UserId.Returns(DefaultUserId);
+            return userAccessor;
         }
     }
 }
