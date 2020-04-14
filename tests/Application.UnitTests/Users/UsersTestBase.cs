@@ -6,6 +6,7 @@ using Application.Common.AppSettingHelpers.Main;
 using Application.Common.Interfaces;
 using Application.Users;
 using Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
@@ -21,15 +22,44 @@ namespace Application.UnitTests.Users
 
         protected IOptions<PhotosDirectory> PhotosDirectoryOptions;
 
+        protected IOptions<PhotoSettings> PhotoSettingsOptions;
+
+        protected IOptions<RootFileFolderDirectory> RootDirectoryOptions;
+
         protected IStringLocalizer<UsersResource> UserLocalizer;
 
         public UsersTestBase()
         {
             UserLocalizer = TestHelpers.MockLocalizer<UsersResource>();
             FileService = Substitute.For<IFileService>();
+
             PhotosDirectoryOptions = Options.Create(Configuration
                 .GetSection(nameof(PhotosDirectory))
                 .Get<PhotosDirectory>());
+
+            PhotoSettingsOptions = Options.Create(Configuration
+                .GetSection(nameof(PhotoSettings))
+                .Get<PhotoSettings>());
+
+            RootDirectoryOptions = Options.Create(new RootFileFolderDirectory
+            {
+                RootFileFolder = "rootFiles"
+            });
+        }
+
+        protected List<IFormFile> CreateDefaultPhotoFormFiles()
+        {
+            var formFiles = new List<IFormFile>();
+            for (var i = 0; i < 5; i++)
+            {
+                var formFile = Substitute.For<IFormFile>();
+                formFile.FileName.Returns($"{Guid.NewGuid():N}.png");
+                formFile.ContentType.Returns("image/png");
+                formFile.Length.Returns(5000000);
+                formFiles.Add(formFile);
+            }
+
+            return formFiles;
         }
 
         public override async Task InitializeDatabase()
