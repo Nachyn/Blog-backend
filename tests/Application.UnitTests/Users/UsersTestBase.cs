@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Common.AppSettingHelpers.Entities;
 using Application.Common.AppSettingHelpers.Main;
 using Application.Common.Interfaces;
 using Application.Users;
@@ -26,6 +27,8 @@ namespace Application.UnitTests.Users
 
         protected IOptions<RootFileFolderDirectory> RootDirectoryOptions;
 
+        protected IOptions<AppUserSettings> AppUserSettingOptions;
+
         protected IStringLocalizer<UsersResource> UserLocalizer;
 
         public UsersTestBase()
@@ -40,6 +43,10 @@ namespace Application.UnitTests.Users
             PhotoSettingsOptions = Options.Create(Configuration
                 .GetSection(nameof(PhotoSettings))
                 .Get<PhotoSettings>());
+
+            AppUserSettingOptions = Options.Create(Configuration
+                .GetSection("EntitySettings:AppUser")
+                .Get<AppUserSettings>());
 
             RootDirectoryOptions = Options.Create(new RootFileFolderDirectory
             {
