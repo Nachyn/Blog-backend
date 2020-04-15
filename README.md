@@ -24,6 +24,8 @@ Example of developing a REST API server.
 + Mail client: **MailKit**
 + Logging: **Serilog**
 
+##### April 2020
+
 ---
 ![posts](https://raw.githubusercontent.com/Nachyn/Blog-backend/develop/img/posts.png)
 ---
